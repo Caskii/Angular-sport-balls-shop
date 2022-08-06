@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/panier">Panier</a>
+                </li>
+                <li class="nav-item" ngbDropdown>
+                    <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button">
+                        Nom d'utilisateur
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+                        <a ngbDropdownItem routerLink="/profil/commandes">Mes commandes</a>
+                        <a ngbDropdownItem routerLink="/admin/commandes">Gérer commandes</a>
+                        <a ngbDropdownItem routerLink="/admin/produits">Gérer produits</a>
+                        <a ngbDropdownItem (click)="$event.preventDefault()">Déconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-balls-shop": {
+      "hosting": {
+        "balls-shop": [
+          "angular-balls-shop"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-balls-shop"
+  }
+}
