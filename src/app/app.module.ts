@@ -3,12 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -21,7 +20,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-
+import { AuthService } from './Services/auth.service';
+import { UserService } from './Services/user.service';
 
 @NgModule({
   declarations: [
@@ -36,29 +36,20 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ShoppingCartComponent,
     LoginComponent,
     NavbarComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     NgbModule,
-    RouterModule.forRoot([
-      { path:'', component:HomeComponent },
-      { path:'produits', component:ProductsComponent },
-      { path:'panier', component:ShoppingCartComponent },
-      { path:'caisse', component:CheckOutComponent },
-      { path:'commande-reussie', component:OrderSuccessComponent },
-      { path:'connexion', component:LoginComponent},
-      { path:'profil/commandes', component:MyOrdersComponent},
-      { path:'admin/produits', component:AdminProductsComponent },
-      { path:'admin/commandes', component:AdminOrdersComponent },
-      { path:'**', component:NotFoundComponent },
-    ]),
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
