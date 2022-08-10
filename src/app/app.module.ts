@@ -22,6 +22,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './Services/auth.service';
 import { UserService } from './Services/user.service';
+import { AuthGuard } from './guards/auth-guard.service';
+import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { UserService } from './Services/user.service';
   providers: [
     AuthService,
     UserService,
+    AuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

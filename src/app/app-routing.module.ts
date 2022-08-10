@@ -12,20 +12,19 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
-const adminOnly = () => hasCustomClaim('admin');
-const redirectLoggedInToItems = () => redirectLoggedInTo(['']);
+import { AuthGuard } from './guards/auth-guard.service';
+import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
   { path:'produits', component:ProductsComponent },
   { path:'panier', component:ShoppingCartComponent },
-  { path:'connexion', component:LoginComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToItems }},
-  { path:'caisse', component:CheckOutComponent, canActivate: [AngularFireAuthGuard] },
-  { path:'commande-reussie', component:OrderSuccessComponent, canActivate: [AngularFireAuthGuard] },
-  { path:'profil/commandes', component:MyOrdersComponent, canActivate: [AngularFireAuthGuard]},
-  { path:'admin/produits', component:AdminProductsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly } },
-  { path:'admin/commandes', component:AdminOrdersComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: adminOnly } },
+  { path:'connexion', component:LoginComponent },
+  { path:'caisse', component:CheckOutComponent, canActivate: [AuthGuard] },
+  { path:'commande-reussie', component:OrderSuccessComponent, canActivate: [AuthGuard]},
+  { path:'profil/commandes', component:MyOrdersComponent, canActivate: [AuthGuard]},
+  { path:'admin/produits', component:AdminProductsComponent, canActivate: [AuthGuard,AdminAuthGuard]},
+  { path:'admin/commandes', component:AdminOrdersComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'**', component:NotFoundComponent },
 ];
 
