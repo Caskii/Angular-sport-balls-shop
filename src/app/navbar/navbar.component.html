@@ -10,14 +10,16 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/panier">Panier</a>
                 </li>
-                <li *ngIf="authService.user$ |async as user;else login" class="nav-item" ngbDropdown>
+                <li *ngIf="appUser as user;else login" class="nav-item" ngbDropdown>
                     <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown1" role="button">
-                        {{user.displayName}}
+                        {{user.name}}
                     </a>
                     <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
                         <a ngbDropdownItem routerLink="/profil/commandes">Mes commandes</a>
-                        <a ngbDropdownItem routerLink="/admin/commandes">Gérer commandes</a>
-                        <a ngbDropdownItem routerLink="/admin/produits">Gérer produits</a>
+                        <ng-container *ngIf="user.isAdmin">
+                            <a ngbDropdownItem routerLink="/admin/commandes">Gérer commandes</a>
+                            <a ngbDropdownItem routerLink="/admin/produits">Gérer produits</a>
+                        </ng-container>
                         <a ngbDropdownItem (click)="logout()">Déconnexion</a>
                     </div>
                 </li>

@@ -14,6 +14,7 @@ import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { AdminAuthGuard } from './guards/admin-auth-guard.service';
+import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path:'caisse', component:CheckOutComponent, canActivate: [AuthGuard] },
   { path:'commande-reussie', component:OrderSuccessComponent, canActivate: [AuthGuard]},
   { path:'profil/commandes', component:MyOrdersComponent, canActivate: [AuthGuard]},
+  { path:'admin/produits/nouveau', component:AdminProductFormComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'admin/produits', component:AdminProductsComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'admin/commandes', component:AdminOrdersComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'**', component:NotFoundComponent },

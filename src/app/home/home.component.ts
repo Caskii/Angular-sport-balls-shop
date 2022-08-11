@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   constructor(private authService:AuthService, private userService:UserService) { }
 
   ngOnInit(): void {
-    //this.authService.user$.pipe(switchMap((user:any)=>this.userService.get(user.uid))).pipe(map((appuser:any) => (appuser.isAdmin==true)));
   }
   
 

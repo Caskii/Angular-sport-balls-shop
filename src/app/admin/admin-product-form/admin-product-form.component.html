@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-6">
+        <form #f="ngForm" (ngSubmit)="save(f.value)">
+            <div class="mb-3">
+                <label for="title" class="form-label">Nom</label>
+                <input #title="ngModel" ngModel required name="title" id="title" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+                    Veuillez entrer un nom
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Prix</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">CHF</span>
+                    <input #price="ngModel" ngModel required [min]="0" name="price" id="price" type="number" class="form-control">
+                </div>
+                <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                    <div *ngIf="price.errors?.['required']">
+                        Veuillez entrer un prix
+                    </div>
+                    <div *ngIf="price.errors?.['min']">
+                        Le prix doit être un nombre positif
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Catégorie</label>
+                <select #category="ngModel" ngModel required name="category" id="category" class="form-control">
+                    <option disabled selected value>Choisissez une catégorie</option>
+                    <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+                    Choisissez une catégorie
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="imageUrl" class="form-label">Lien vers l'image</label>
+                <input #imageUrl="ngModel" ngModel required [pattern]="'^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'" name="imageUrl" id="imageUrl" type="text" class="form-control">
+            </div>
+            <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                <div *ngIf="imageUrl.errors?.['required']">
+                    Veuillez entrer une url
+                </div>
+                <div *ngIf="imageUrl.errors?.['pattern']">
+                    Veuillez entrer une url valide
+                </div>
+            </div>
+            <button class="btn btn-primary" [disabled]='f.invalid'>Ajouter</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img [src]="imageUrl.value" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{title.value}}</h5>
+              <p class="card-text">{{price.value|currency:'CHF '}}</p>
+            </div>
+          </div>
+    </div>
+</div>

@@ -24,6 +24,10 @@ import { AuthService } from './Services/auth.service';
 import { UserService } from './Services/user.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { AdminAuthGuard } from './guards/admin-auth-guard.service';
+import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
+import { CategoryService } from './Services/category.service';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './Services/product.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { AdminAuthGuard } from './guards/admin-auth-guard.service';
     LoginComponent,
     NavbarComponent,
     NotFoundComponent,
+    AdminProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,10 +52,13 @@ import { AdminAuthGuard } from './guards/admin-auth-guard.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
+    FormsModule,
   ],
   providers: [
     AuthService,
     UserService,
+    CategoryService,
+    ProductService,
     AuthGuard,
     AdminAuthGuard
   ],
