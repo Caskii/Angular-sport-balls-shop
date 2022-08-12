@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 import { Categories } from 'src/app/models/categories';
+import { Products } from 'src/app/models/products';
 import { CategoryService } from 'src/app/Services/category.service';
 import { ProductService } from 'src/app/Services/product.service';
 
@@ -11,20 +13,39 @@ import { ProductService } from 'src/app/Services/product.service';
 })
 export class AdminProductFormComponent implements OnInit {
   categories: Categories[] | undefined;
+  product:Products={} as Products;
+  id:string|null;
 
   constructor(
     private categoryService:CategoryService,
     private productService:ProductService,
-    private router:Router
+    private router:Router,
+    private route: ActivatedRoute
     ) {
-    categoryService.getCategories().subscribe((categories:any) => this.categories=categories);
-   }
+      categoryService.getCategories().subscribe((categories:any) => this.categories=categories);
+      this.id = this.route.snapshot.paramMap.get('id');
+      if(this.id){
+        this.productService.get(this.id).pipe(take(1)).subscribe((p:any) => this.product=p)
+      }
+  }
 
   ngOnInit(): void {
   }
 
-  save(product:any){
-    this.productService.create(product)
+  save(product:Products){
+    if (this.id){
+      this.productService.update(this.id, product)
+    }else{
+      this.productService.create(product)
+    }
     this.router.navigate(['/admin/produits']);
+  }
+  delete(){
+    if(this.id){
+      if(confirm('Voulez-vous vraiment supprimer ce produit ?')){
+        this.productService.delete(this.id)
+        this.router.navigate(['/admin/produits']);
+      }
+    }
   }
 }

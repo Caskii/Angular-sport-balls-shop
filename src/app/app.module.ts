@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { DataTablesModule } from "angular-datatables";
 
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -53,6 +54,7 @@ import { ProductService } from './Services/product.service';
     AngularFireAuthModule,
     NgbModule,
     FormsModule,
+    DataTablesModule,
   ],
   providers: [
     AuthService,

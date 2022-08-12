@@ -25,6 +25,7 @@ const routes: Routes = [
   { path:'commande-reussie', component:OrderSuccessComponent, canActivate: [AuthGuard]},
   { path:'profil/commandes', component:MyOrdersComponent, canActivate: [AuthGuard]},
   { path:'admin/produits/nouveau', component:AdminProductFormComponent, canActivate: [AuthGuard,AdminAuthGuard]},
+  { path:'admin/produits/:id', component:AdminProductFormComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'admin/produits', component:AdminProductsComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'admin/commandes', component:AdminOrdersComponent, canActivate: [AuthGuard,AdminAuthGuard]},
   { path:'**', component:NotFoundComponent },

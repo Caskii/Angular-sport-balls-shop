@@ -1,21 +1,23 @@
-<p>
-    <a routerLink="/admin/produits/nouveau" class="btn btn-primary">Ajouter un produit</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of products$|async">
-            <td>{{product.data.title}}</td>
-            <td>{{product.data.price|currency:'CHF '}}</td>
-            <td>
-                <a [routerLink]="['admin/produits/',product.key]">Modifier</a>
-            </td>
-        </tr>
-    </tbody>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prix</th>
+      <th>Catégorie</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of this.products">
+      <td>{{product.data.title}}</td>
+      <td>{{product.data.price|currency:'CHF '}}</td>
+      <td>{{product.data.category}}</td>
+      <td>
+          <a [routerLink]="[product.key]">Modifier</a>
+      </td>
+  </tr>
+  </tbody>
 </table>
+<p>
+  <a routerLink="/admin/produits/nouveau" class="btn btn-primary">Ajouter un produit</a>
+</p>
