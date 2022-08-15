@@ -1,1 +1,21 @@
-<p>products works!</p>
+<div class="row">
+  <div class="col-3">
+    <product-filter [category]="category"></product-filter>
+  </div>
+  <div class="col">
+    <div class="row row-cols-1">
+      <div *ngFor="let product of filteredProducts" class="col">
+        <div class="card" style="width: 18rem;">
+          <img [src]="product.data.imageUrl" class="card-img-top" alt="product image">
+          <div class="card-body">
+            <h5 class="card-title">{{product.data.title}}</h5>
+            <p class="card-text">{{product.data.price | currency:'CHF '}}</p>
+          </div>
+          <div class="card-footer d-grid gap-2">
+            <a href="#" class="btn btn-primary">Ajouter au panier</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

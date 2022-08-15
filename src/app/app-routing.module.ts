@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFireAuthGuard,hasCustomClaim, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { CheckOutComponent } from './check-out/check-out.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -17,7 +15,7 @@ import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
 
 const routes: Routes = [
-  { path:'', component:HomeComponent },
+  { path:'', component:ProductsComponent },
   { path:'produits', component:ProductsComponent },
   { path:'panier', component:ShoppingCartComponent },
   { path:'connexion', component:LoginComponent },

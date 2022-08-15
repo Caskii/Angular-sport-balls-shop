@@ -10,7 +10,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { DataTablesModule } from "angular-datatables";
 
-import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
@@ -29,11 +28,11 @@ import { AdminProductFormComponent } from './admin/admin-product-form/admin-prod
 import { CategoryService } from './Services/category.service';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from './Services/product.service';
+import { ProductFilterComponent } from './product-filter/product-filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     ProductsComponent,
     CheckOutComponent,
     OrderSuccessComponent,
@@ -45,6 +44,7 @@ import { ProductService } from './Services/product.service';
     NavbarComponent,
     NotFoundComponent,
     AdminProductFormComponent,
+    ProductFilterComponent,
   ],
   imports: [
     BrowserModule,

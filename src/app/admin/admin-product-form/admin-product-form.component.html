@@ -27,7 +27,7 @@
                 <label for="category" class="form-label">Catégorie</label>
                 <select #category="ngModel" [(ngModel)]="product.category" required name="category" id="category" class="form-control">
                     <option disabled selected value>Choisissez une catégorie</option>
-                    <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+                    <option *ngFor="let category of categories$ |async" [value]="category.data.name">{{category.data.name}}</option>
                 </select>
                 <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
                     Choisissez une catégorie

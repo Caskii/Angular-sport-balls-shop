@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Categories } from 'src/app/models/categories';
 import { Products } from 'src/app/models/products';
 import { CategoryService } from 'src/app/Services/category.service';
@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/Services/product.service';
   styleUrls: ['./admin-product-form.component.css']
 })
 export class AdminProductFormComponent implements OnInit {
-  categories: Categories[] | undefined;
+  categories$: Observable<any[]>;
   product:Products={} as Products;
   id:string|null;
 
@@ -22,7 +22,7 @@ export class AdminProductFormComponent implements OnInit {
     private router:Router,
     private route: ActivatedRoute
     ) {
-      categoryService.getCategories().subscribe((categories:any) => this.categories=categories);
+      this.categories$=categoryService.getall();
       this.id = this.route.snapshot.paramMap.get('id');
       if(this.id){
         this.productService.get(this.id).pipe(take(1)).subscribe((p:any) => this.product=p)
