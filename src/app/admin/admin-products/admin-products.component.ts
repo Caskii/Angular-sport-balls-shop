@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Products } from 'src/app/models/products';
