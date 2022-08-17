@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AppUser } from '../models/app-user';
+import { ShoppingCart } from '../models/shopping-cart';
 import { AuthService } from '../Services/auth.service';
 import { ShoppingCartService } from '../Services/shopping-cart.service';
 
@@ -12,7 +14,7 @@ import { ShoppingCartService } from '../Services/shopping-cart.service';
 export class NavbarComponent implements OnInit {
   isCollapsed:boolean = true;
   appUser: AppUser | undefined;
-  shoppingCartnumberOfItems: number=0;
+  cart$:Observable<ShoppingCart> | undefined;
 
   constructor(
     private authService: AuthService,
@@ -20,7 +22,7 @@ export class NavbarComponent implements OnInit {
     private router:Router) { }
   async ngOnInit() {
     this.authService.appUser$.subscribe((appuser:any) => this.appUser=appuser);
-    (await this.shoppingCartService.getTotalNumberOfProduct()).subscribe(tot=>this.shoppingCartnumberOfItems=tot);
+    this.cart$ = await this.shoppingCartService.getCart();
   }
   logout(){
     this.authService.logout();

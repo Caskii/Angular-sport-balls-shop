@@ -11,41 +11,27 @@ export class ShoppingCartService {
 
   constructor(private db:AngularFireDatabase) { }
   
-  private create(){
-    return this.db.list('shopping-carts').push({
-      dateCreated: new Date().getTime()
-    });
-  }
-  public async getCart(){
+  public async getCart(): Promise<Observable<ShoppingCart>>{
     let cartId =  await this.getOrCreateCartId();
-    return this.db.object('shopping-carts/'+cartId).snapshotChanges();
-  }
-  public async getCartData(): Promise<Observable<any>>{
-    let cartId =  await this.getOrCreateCartId();
-    return this.db.object('shopping-carts/'+cartId).valueChanges();
+    return this.db.object('shopping-carts/'+cartId).valueChanges().pipe(map((cart:any)=>new ShoppingCart(cart.items)));
   }
   public getItemRef(cartId:string,productId:string){
    return this.db.object('shopping-carts/'+cartId+'/items/'+productId);
   }
 
-  private async getOrCreateCartId() {
-    let cartId =localStorage.getItem('cartId');
-
-    if(cartId) return cartId;
-
-    let result = await this.create();
-    if(result.key){
-      localStorage.setItem('cartId', result.key);
-      return result.key;
-    }
-    return null;
+  public async clearCart() {
+    let cartId = await this.getOrCreateCartId();
+    this.db.object('shopping-carts/'+cartId+'/items').remove();
   }
+
   public async addToCart(product:Products){
     this.updateNumberOfProduct(product,1);
   }
+
   public async removeFromCart(product: Products) {
     this.updateNumberOfProduct(product,-1);
   }
+
   private async updateNumberOfProduct(product:Products,number:number){
     let cartId =  await this.getOrCreateCartId();
     if (!cartId) return null;
@@ -70,14 +56,23 @@ export class ShoppingCartService {
     })
     return true;
   }
- public async getTotalNumberOfProduct(){
-    let cart$ = await this.getCartData();
-    return cart$.pipe(map(cart=>{
-      let total=0;
-      for(let key in cart.items){
-        total+=cart.items[key].quantity;
-      }
-      return total;
-    }));
+
+  private create(){
+    return this.db.list('shopping-carts').push({
+      dateCreated: new Date().getTime()
+    });
+  }
+
+  private async getOrCreateCartId() {
+    let cartId =localStorage.getItem('cartId');
+
+    if(cartId) return cartId;
+
+    let result = await this.create();
+    if(result.key){
+      localStorage.setItem('cartId', result.key);
+      return result.key;
+    }
+    return null;
   }
 }

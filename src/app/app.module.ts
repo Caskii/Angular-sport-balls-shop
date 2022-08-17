@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from './Services/product.service';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ShoppingCartService } from './Services/shopping-cart.service';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ShoppingCartService } from './Services/shopping-cart.service';
     NotFoundComponent,
     AdminProductFormComponent,
     ProductFilterComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,

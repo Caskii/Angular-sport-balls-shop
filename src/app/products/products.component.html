@@ -3,7 +3,7 @@
     <product-filter [category]="category"></product-filter>
   </div>
   <div class="col">
-    <div class="row row-cols-auto">
+    <div *ngIf="cart$|async as cart" class="row row-cols-auto">
       <div *ngFor="let product of filteredProducts" class="col">
         <div class="card" style="width: 18rem;">
           <img [src]="product.imageUrl" class="card-img-top" alt="product image">
@@ -12,19 +12,9 @@
             <p class="card-text">{{product.price | currency:'CHF '}}</p>
           </div>
           <div class="card-footer d-grid gap-2">
-            <button *ngIf="false else updateQuantity" (click)="addToCart(product)" class="btn btn-primary">Ajouter au panier</button>
-            <ng-template #updateQuantity>
-              <div class="row g-0">
-                <div class="col-2  d-grid gap-2">
-                  <button (click)="removeFromCart(product)" class="btn btn-secondary">-</button>
-                </div>
-                <div class="col text-center">
-                   dans le panier
-                </div>
-                <div class="col-2  d-grid gap-2">
-                  <button (click)="addToCart(product)" class="btn btn-secondary">+</button>
-                </div>
-              </div>
+            <product-quantity *ngIf=" cart && (!cart.isEmpty()) && cart.getQuantity(product.key)>=1 else OnlyAdd" [product]="product" [shopping-cart]="cart"></product-quantity>
+            <ng-template #OnlyAdd>
+              <button  (click)="addToCart(product)" class="btn btn-primary">Ajouter au panier</button>
             </ng-template>
           </div>
         </div>
