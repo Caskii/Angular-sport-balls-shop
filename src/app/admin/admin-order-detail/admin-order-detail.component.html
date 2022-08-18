@@ -1,0 +1,8 @@
+<div *ngIf="order$ |async as order">
+    <h3>{{order.date | date}}</h3>
+    <div>
+        {{order.address.name}}
+        {{order.address.address}}
+        {{order.address.city}}
+    </div>   
+</div>

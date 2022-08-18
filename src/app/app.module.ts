@@ -31,6 +31,8 @@ import { ProductService } from './Services/product.service';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ShoppingCartService } from './Services/shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './Services/order.service';
+import { AdminOrderDetailComponent } from './admin/admin-order-detail/admin-order-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     AdminProductFormComponent,
     ProductFilterComponent,
     ProductQuantityComponent,
+    AdminOrderDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     AuthService,
     UserService,
     CategoryService,
+    OrderService,
     ProductService,
     ShoppingCartService,
     AuthGuard,

@@ -1,1 +1,51 @@
-<p>check-out works!</p>
+<h2>Adresse de livraison</h2>
+<div *ngIf="cart$ |async as tempCart" class="row">
+    <div class="col-6">
+        <form  #f="ngForm" (ngSubmit)="placeOrder(f.value)">
+            <div class="mb-3">
+                <label for="title" class="form-label">Nom</label>
+                <input #name="ngModel" ngModel required name="name" id="name" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                    Veuillez entrer un nom
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Adresse</label>
+                <input #address="ngModel" ngModel required name="address" id="address" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+                    Veuillez entrer une adresse
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">Ville</label>
+                <input #city="ngModel" ngModel required name="city" id="city" type="text" class="form-control">
+                <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                    Veuillez entrer une ville
+                </div>
+            </div>
+            <button class="btn btn-primary" [disabled]='f.invalid'>Valider</button>
+        </form>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Resumé de la commande</h5>
+              <p class="card-text">Vous avez {{tempCart.totalItemsCount}} objet dans votre panier</p>
+              <ul class="list-group list-group-flush">
+                <li *ngFor="let item of tempCart.items" class="list-group-item">
+                    {{item.quantity}} x {{item.product.title}}
+                    <div class="float-end">
+                        {{item.totalPrice | currency: 'CHF '}}
+                    </div>
+                </li>
+                <li class="list-group-item fw-bold">
+                    Total
+                    <div class="float-end">
+                        {{tempCart.totalPrice | currency: 'CHF '}}
+                    </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </div>
+</div>

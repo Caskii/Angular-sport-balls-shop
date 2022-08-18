@@ -17,6 +17,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   clearCart(){
-    this.shoppingCartService.clearCart();
+    if(confirm('Êtes-vous sur de vouloir vider votre panier ?')){
+      this.shoppingCartService.clearCart();
+    }
   }
 }

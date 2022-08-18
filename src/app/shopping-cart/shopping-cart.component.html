@@ -32,5 +32,8 @@
             </tr>
         </tfoot>
     </table>
-    <button (click)="clearCart()" class="btn btn-danger btn-sm">Vider le panier</button>
+    <div class="d-flex justify-content-between">
+        <button (click)="clearCart()" *ngIf="cart.items.length" class="btn btn-danger btn-sm">Vider le panier</button>
+        <a *ngIf="cart.items.length" routerLink="/caisse" class="btn btn-success">Valider la commande</a>
+    </div>
 </ng-container>

@@ -1,1 +1,17 @@
-<p>my-orders works!</p>
+<h1>Orders</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Adresse de livraison</th>
+            <th>Date</th>
+            <th>prix total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders$ | async">
+            <td>{{ order.address.address }}</td>
+            <td>{{ order.date | date}}</td>
+            <td>{{ order.totalPrice | currency:"CHF "}}</td>
+        </tr>
+    </tbody>
+</table>
