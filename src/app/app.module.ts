@@ -1,59 +1,36 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DataTablesModule } from 'angular-datatables';
+import { SharedModule } from 'shared/shared.module';
+import { ShoppingModule } from 'shopping/shopping.module';
 
+import { environment } from '../environments/environment';
+import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { DataTablesModule } from "angular-datatables";
-
-import { ProductsComponent } from './products/products.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AdminAuthGuard } from './guards/admin-auth-guard.service';
+import { AuthGuard } from './guards/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthService } from './Services/auth.service';
-import { UserService } from './Services/user.service';
-import { AuthGuard } from './guards/auth-guard.service';
-import { AdminAuthGuard } from './guards/admin-auth-guard.service';
-import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
-import { CategoryService } from './Services/category.service';
-import { FormsModule } from '@angular/forms';
-import { ProductService } from './Services/product.service';
-import { ProductFilterComponent } from './product-filter/product-filter.component';
-import { ShoppingCartService } from './Services/shopping-cart.service';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
-import { OrderService } from './Services/order.service';
-import { AdminOrderDetailComponent } from './admin/admin-order-detail/admin-order-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent,
-    CheckOutComponent,
-    OrderSuccessComponent,
-    MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    ShoppingCartComponent,
     LoginComponent,
     NavbarComponent,
     NotFoundComponent,
-    AdminProductFormComponent,
-    ProductFilterComponent,
-    ProductQuantityComponent,
-    AdminOrderDetailComponent,
   ],
   imports: [
     BrowserModule,
+    SharedModule,
+    AdminModule,
+    ShoppingModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -63,12 +40,6 @@ import { AdminOrderDetailComponent } from './admin/admin-order-detail/admin-orde
     DataTablesModule,
   ],
   providers: [
-    AuthService,
-    UserService,
-    CategoryService,
-    OrderService,
-    ProductService,
-    ShoppingCartService,
     AuthGuard,
     AdminAuthGuard
   ],

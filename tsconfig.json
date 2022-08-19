@@ -21,7 +21,18 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths":{
+      "shared/*":[
+        "src/app/shared/*"
+      ],
+      "shopping/*":[
+        "src/app/shopping/*"
+      ],
+      "admin/*":[
+        "src/app/admin/*"
+      ],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

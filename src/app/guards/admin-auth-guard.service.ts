@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {  CanActivate} from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { AuthService } from '../Services/auth.service';
-import { UserService } from '../Services/user.service';
+import { AuthService } from 'shared/services/auth.service';
+import { UserService } from 'shared/services/user.service';
 
 @Injectable({
   providedIn: 'root'

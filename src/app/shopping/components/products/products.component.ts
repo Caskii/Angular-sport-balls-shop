@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { pipe,take,map, Subscription, switchMap, Observable } from 'rxjs';
-import { Products } from '../models/products';
-import { ShoppingCart } from '../models/shopping-cart';
-import { ProductService } from '../Services/product.service';
-import { ShoppingCartService } from '../Services/shopping-cart.service';
+import { Products } from 'shared/models/products';
+import { ShoppingCart } from 'shared/models/shopping-cart';
+import { ProductService } from 'shared/services/product.service';
+import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-products',

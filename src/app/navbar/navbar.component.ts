@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AppUser } from '../models/app-user';
-import { ShoppingCart } from '../models/shopping-cart';
-import { AuthService } from '../Services/auth.service';
-import { ShoppingCartService } from '../Services/shopping-cart.service';
+import { AppUser } from 'shared/models/app-user';
+import { ShoppingCart } from 'shared/models/shopping-cart';
+import { AuthService } from 'shared/services/auth.service';
+import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 
 @Component({
   selector: 'navbar',
