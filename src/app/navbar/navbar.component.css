@@ -1,3 +1,15 @@
 .dropdown-menu{
     z-index: 2;
 }
+a.navbar-brand{
+    max-width: fit-content;
+}
+@media screen and (max-width: 600px) {
+    .shopNameImage{
+        max-width:160px;
+    }
+    .logo{
+        height: 48px;
+        width: 48px;
+    }
+  }
