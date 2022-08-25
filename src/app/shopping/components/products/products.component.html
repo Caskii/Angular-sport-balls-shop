@@ -4,7 +4,7 @@
   </div>
   <div class="col">
     <div *ngIf="cart$|async as cart" class="row row-cols-auto">
-      <div *ngFor="let product of filteredProducts" class="col">
+      <div *ngFor="let product of filteredProducts" class="col d-flex align-items-stretch mb-2">
         <div class="card" style="width: 18rem;">
           <img [src]="product.imageUrl" class="card-img-top" alt="product image">
           <div class="card-body">

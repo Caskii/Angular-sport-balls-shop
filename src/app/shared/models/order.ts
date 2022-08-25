@@ -5,7 +5,7 @@ export class Order{
     items:any[];
     totalPrice:number;
 
-    constructor(public userId:string, public address:any, cart:ShoppingCart){
+    constructor(public userId:string, public userName:string,public sent:boolean, public address:any, cart:ShoppingCart){
         this.date=new Date().getTime();
 
         this.items = cart?.items.map(i=>{

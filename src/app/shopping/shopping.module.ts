@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ShoppingRoutingModule } from './shopping-routing.module';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
-import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -16,7 +15,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     ProductsComponent,
     CheckOutComponent,
-    OrderSuccessComponent,
     MyOrdersComponent,
     ShoppingCartComponent,
     ProductFilterComponent,

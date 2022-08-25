@@ -1,5 +1,5 @@
 <h2>Adresse de livraison</h2>
-<div *ngIf="cart$ |async as tempCart" class="row">
+<div *ngIf="cart as tempCart" class="row">
     <div class="col-6">
         <form  #f="ngForm" (ngSubmit)="placeOrder(f.value)">
             <div class="mb-3">

@@ -17,7 +17,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   cart! : ShoppingCart;
   userSubscription! : Subscription;
   cartSubscription! : Subscription;
-  userId:string|undefined;
+  user!: firebase.default.User | null;
 
   constructor(
     private router:Router,
@@ -26,7 +26,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     private authService:AuthService) { }
   
   async ngOnInit() {
-    this.userSubscription = this.authService.user$.subscribe(user=>this.userId = user?.uid);
+    this.userSubscription = this.authService.user$.subscribe(user=>this.user=user);
     this.cart$ = await this.shoppingCartService.getCart();
     this.cartSubscription = this.cart$.subscribe(cart=>{
       this.cart=cart;
@@ -40,10 +40,10 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
   async placeOrder(address:any){
-    if(this.userId != undefined){
-      let order = new Order(this.userId,address,this.cart);
+    if(this.user != undefined && this.user.displayName!= null){
+      let order = new Order(this.user.uid,this.user.displayName,false,address,this.cart);
       let result = await this.orderService.saveOrder(order);
-      this.router.navigate(['/commande-reussie',result.key]);
+      this.router.navigate(['/profil/commandes']);
     }
   }
 }

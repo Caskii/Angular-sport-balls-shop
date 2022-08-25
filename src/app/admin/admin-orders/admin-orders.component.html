@@ -1,18 +1,31 @@
-<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
-    <thead>
-      <tr>
-        <th>Client</th>
-        <th>Date</th>
-        <th></th>
+<div class="tableDiv">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Date</th>
+          <th>Prix total</th>
+          <th>statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of this.orders">
+          <td>{{order.data.userName}}</td>
+          <td>{{order.data.date|date}}</td>
+          <td>{{order.data.totalPrice|currency:"CHF "}}</td>
+          <td [style.backgroundColor]="order.data.sent ? '#90B77D' : '#FF9F29'"></td>
+          <td>
+              <a [routerLink]="[order.key]">Voir</a>
+          </td>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of this.orders">
-        <td>{{order.data.userId}}</td>
-        <td>{{order.data.date|date}}</td>
-        <td>
-            <a [routerLink]="[order.key]">Voir</a>
-        </td>
-    </tr>
-    </tbody>
+      </tbody>
   </table>
+</div>
+<p>
+  Statut : 
+</p>
+<div class="square" [style.backgroundColor]= "'#90B77D'"></div> : Envoyée <br>
+<div class="square" [style.backgroundColor]= "'#FF9F29'"></div> : Non-envoyée
+
+

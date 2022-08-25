@@ -1,8 +1,58 @@
+<div>
+<a routerLink="/admin/commandes">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+    </svg>
+    Retour à la liste des commandes
+</a>
 <div *ngIf="order$ |async as order">
-    <h3>{{order.date | date}}</h3>
-    <div>
-        {{order.address.name}}
-        {{order.address.address}}
-        {{order.address.city}}
-    </div>   
+    <h3>Commande : {{id}} </h3>
+    <h5>Passée le : </h5>
+    {{order.date | date:"short"}}
+    <h5>Adresse de livraison :</h5>
+    <div class="card" [style.backgroundColor]="order.sent ? '#90B77D' : '#FF9F29' " style="width: 18rem;">
+        <div class="card-body">
+            <p class="card-text text-right" [textContent]="order.sent ? 'Envoyée' : 'Non-envoyée'">
+            </p>
+            <p class="card-text">
+                {{order.address.name}}<br>
+                {{order.address.address}}<br>
+                {{order.address.city}}
+            </p>
+        </div>
+      </div>
+        
+    <h5>Resumé de la commande :</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Produit</th>
+                <th class="text-center" style="width: 200px">quantité</th>
+                <th class="text-end" style="width: 200px">Prix unitaire</th>
+                <th class="text-end">Prix total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of order.items">
+                <td><img [src]="product.product.imageUrl" class="thumbnail" alt="thumbnail"></td>
+                <td>{{product.product.title}}</td>
+                <td> {{product.quantity}}</td>
+                <td class="text-end">{{product.product.price|currency:"CHF "}}</td>
+                <td class="text-end">{{product.totalPrice|currency:"CHF "}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Prix final</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="text-end">{{order.totalPrice}}</th>
+            </tr>
+        </tfoot>
+    </table>
+    <button class="btn btn-primary" *ngIf="!order.sent" (click)="update(true)" >Marquer comme envoyée</button>
+    <button class="btn btn-warning" *ngIf="order.sent" (click)="update(false)" >Marquer comme non-envoyée</button>
+    <button class="btn btn-danger" *ngIf="this.id" (click)="delete()" type="button">Supprimer</button>
 </div>

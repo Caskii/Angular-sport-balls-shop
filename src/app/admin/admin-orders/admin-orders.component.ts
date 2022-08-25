@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject,map, switchMap } from 'rxjs';
 import { OrderService } from 'shared/services/order.service';
+import { UserService } from 'shared/services/user.service';
 
 @Component({
   selector: 'app-admin-orders',
@@ -12,7 +13,7 @@ export class AdminOrdersComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private orderService:OrderService) {
+  constructor(private orderService:OrderService,private userService:UserService) {
    }
 
   ngOnInit(): void {

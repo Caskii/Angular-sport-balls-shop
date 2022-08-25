@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -18,6 +18,9 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   providers: [
     AuthGuard,
-    AdminAuthGuard
+    AdminAuthGuard,
+    {provide: LOCALE_ID, useValue: "fr-ch" }
   ],
   bootstrap: [AppComponent]
 })
